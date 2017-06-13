@@ -20,6 +20,9 @@ def power(m, c):
     return math.floor(int(c.getATK()) * (1 if m.identity() != c.identity() and m.identity() != ("0", "0") else \
                                          bonus(m)))
 
+def assistpower(m, c, ap):
+    return math.floor(power(m, c) + ap * 0.5 * (int(c.getConv()) + 1) / 100)
+
 def selfpower(m):
     return power(m, m.getCard(0))+power(m, m.getCard(1))
 
@@ -36,6 +39,11 @@ def idcount(lst, m):
             cnt += 1
     return cnt
 
+def checkmemoca(c, m):
+    for i in m:
+        for j in range(2):
+            if c == i.getCard(j): return 1
+            else: return 0
 
 card=[]
 mem=[]
@@ -116,16 +124,19 @@ for i in range(5):
 
 count=0
 total_assist=0
-for i in list(itertools(assist_cand, 5)):
-    if count%100 == 0:
-        print("\r" + "{:5d}".format(count) + "/" + str(len(itertools(assist_cand, 5))) + "\t",end="")
+for i in list(itertools.combinations(assist_cand, 5)):
+    if count%10 == 0:
+        print("\r" + "{:5.1f}".format((count+1)/len(list(itertools.combinations(assist_cand, 5)))*100) + "\t",end="")
     for j in i:
         total_assist += selfpower(j)
-    i = sorted(i, key=lambda x: (int(x.getCard(1)) + math.floor(total_assist/5)*0.5*(int(x.getCard(1).getConv())+1)/100) * -1)
+    i = sorted(i, key=lambda x: assistpower(x, x.getCard(1), total_assist) * -1)
     for j in assist_card:
-        print("",end="")
+        if checkmemoca(j, i): continue
+
 #いま必要なもの：そのカードを他のメンバーが持ってるかの判定
 #   アシストメンバー用のATK評価
+    count += 1
+print("\n")
 
 """
 assist = sorted(cand, key=lambda x: int(x.getATK())*-1)
