@@ -138,34 +138,3 @@ for i in list(itertools.combinations(assist_cand, 5)):
     count += 1
 print("\n")
 
-"""
-assist = sorted(cand, key=lambda x: int(x.getATK())*-1)
-total_assist=0
-assist_prob=0
-for i in assist[:10]:
-    total_assist += int(i.getATK())
-    assist_prob += 0.5*(int(i.getConv())+1)
-assist[:10] = sorted(cand, key=lambda x: (int(x.getATK()) + math.floor(total_assist/5)*0.5*(int(x.getConv())+1)/100) * -1)
-for i in assist[10:]:
-    if int(assist[9].getATK()) + math.floor(total_assist/5)*0.5*(int(assist[9].getConv())+1)/100 <\
-       int(i.getATK()) + math.floor((total_assist-int(assist[9].getATK())+int(i.getATK()))/5)*0.5*(int(i.getConv())+1)/100:
-        total_assist += int(i.getATK()) - int(assist[9].getATK())
-        assist[9] = i
-        assist[:10] = sorted(assist[:10], key=lambda x: (int(x.getATK()) + math.floor(total_assist/5)*0.5+(int(x.getConv())+1)/100) * -1)
-"""
-
-
-
-"""
-total_atk=0
-for i in front:
-    total_atk += selfpower(i)
-    print(YELLOW + ("　　" + i.getName())[-6:] + " ATK:"+ UNDER + "{:>6d}".format(selfpower(i)) + ENDC +
-          "\tbonus: " + "{:03.3f}".format(bonus(i)))
-    for j in range(2):
-        print("\t" + "{:6d}".format(power(i, i.getCard(j))) + "{:>4}".format(i.getCard(j).getRare()) +
-              ((" +" + i.getCard(j).getConv()) if i.getCard(j).getConv() != "0" else "") +
-              "\t" + i.getCard(j).getName())
-print("total_atk: " + YELLOW + UNDER + str(total_atk) + ENDC)
-"""
-
