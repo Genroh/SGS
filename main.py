@@ -63,13 +63,12 @@ for i in f:
     mem.append(Member.Member(i))
     for i in range(2):
         mem[-1].setCard(dummy_card, i)
-
 f.flush()
 f.close()
 
 front=[mem[0], mem[1], mem[2], mem[3], mem[4]]
 
-sorted(mem, key=lambda x: x.identity() != ("0", "1"))[0].setLove("179")
+sorted(mem, key=lambda x: x.identity() != ("5", "2"))[0].setLove("204")
 
 
 for i, j in itertools.product(range(len(mem)), range(len(card))):
@@ -102,7 +101,7 @@ assist_card[:10] = sorted(cand, key=lambda x: (int(x.getATK()) + math.floor(tota
 for i in assist_card[10:]:
     if int(assist_card[9].getATK()) + math.floor(total_assist/5)*0.5*(int(assist_card[9].getConv())+1)/100 <\
        int(i.getATK()) + math.floor((total_assist-int(assist_card[9].getATK())+int(i.getATK()))/5)*0.5*(int(i.getConv())+1)/100:
-        total_assist += int(i.getATK()) - int(assist[9].getATK())
+        total_assist += int(i.getATK()) - int(assist_card[9].getATK())
         assist_card[9] = i
         assist_card[:10] = sorted(assist_card[:10], key=lambda x: (int(x.getATK()) + math.floor(total_assist/5)*0.5+(int(x.getConv())+1)/100) * -1)
 
